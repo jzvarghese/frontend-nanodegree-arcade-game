@@ -1,6 +1,6 @@
 // Enemies our player must avoid
 // this function will be called with the keyword new
-var Enemy = function(loc_x,loc_y,init_speed) {
+var Enemy = function(init_x,init_y,init_speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -9,8 +9,8 @@ var Enemy = function(loc_x,loc_y,init_speed) {
     this.sprite = 'images/enemy-bug.png';
 
     //add initial position and speed for enemies
-    this.x = loc_x;
-    this.y = loc_y;
+    this.x = init_x;
+    this.y = init_y;
     this.speed = init_speed;
 }
 
@@ -31,8 +31,31 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var Player = function(init_x,init_y,player_sprite){
 
+    //load sprite for character
+    this.sprite = player_sprite;
+    this.x = init_x;
+    this.y = init_y;
+}
 
+// Draw the enemy on the screen, required method for game
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+Player.prototype.update = function(first_argument) {
+    // body...
+};
+
+Player.prototype.handleInput = function(allowedKeys) {
+    console.log(allowedKeys);
+    //move the player depending on what key was pressed
+    //and check to see whether they tried to move off
+    //screen or got to the water
+
+    this.update();
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -41,6 +64,7 @@ Enemy.prototype.render = function() {
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
+//e.keyCode is the unicode value of the key that was pressed
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',

@@ -80,7 +80,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     function checkCollisions() {
@@ -91,13 +91,13 @@ var Engine = (function(global) {
         for (var i = allEnemies.length - 1; i >= 0; i--) {
             //check to see if enemy is on the same row as player
             if(y == allEnemies[i].y) {
-                console.log("Enemy on same row as player");
                 //then we need to check the x coord
-                if(x + 83 >= allEnemies[i].x &&
-                    allEnemies[i].x + 83 >= x) {
+                if(x + 50 >= allEnemies[i].x &&
+                    allEnemies[i].x + 50 >= x) {
                     //then there has been a collision, reset the position
                     //of the player
-
+                    console.log("Player X:",x,"Enemy X:",allEnemies[i].x);
+                    player.reset();
 
                 }//end if possible collision
             }//end if on the same row

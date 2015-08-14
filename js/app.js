@@ -52,8 +52,8 @@ Player.prototype.update = function(first_argument) {
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
-    console.log("The key is:");
-    console.log(allowedKeys);
+    //console.log("The key is:");
+    //console.log(allowedKeys);
 
     //check to see if we got a legitimate key press
     if(allowedKeys !== undefined){
@@ -88,11 +88,11 @@ Player.prototype.handleInput = function(allowedKeys) {
               break;
         }//end switch
 
-            console.log("X is:");
-            console.log(this.x);
+            //console.log("X is:");
+            //console.log(this.x);
 
-            console.log("Y is:");
-            console.log(this.y);
+            //console.log("Y is:");
+            //console.log(this.y);
     }//end if
     //move the player depending on what key was pressed
     //and check to see whether they tried to move off

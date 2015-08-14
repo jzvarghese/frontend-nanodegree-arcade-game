@@ -49,20 +49,57 @@ Player.prototype.update = function(first_argument) {
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
-    console.log("The key is:")
+    console.log("The key is:");
     console.log(allowedKeys);
+
+    //check to see if we got a legitimate key press
+    if(allowedKeys !== undefined){
+
+        switch(allowedKeys){
+            case 'right':
+              if(this.x < 603){
+                this.x += 101;
+              }
+              break;
+            case 'left':
+              if(this.x > 3){
+                this.x -= 101;
+              }
+              break;
+            case 'up':
+              if(this.y > 140){
+                this.y -= 83;
+              }
+              else {
+                //we scored a point
+                console.log("score");
+              }
+              break;
+            case 'down':
+              if(this.y < 390){
+                this.y += 83;
+              }
+              break;
+            default:
+              break;
+        }//end switch
+
+            console.log("X is:");
+            console.log(this.x);
+
+            console.log("Y is:");
+            console.log(this.y);
+    }//end if
     //move the player depending on what key was pressed
     //and check to see whether they tried to move off
     //screen or got to the water
-
-    //this.update();
-};
+};//end handleInput
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
 //Player(init_x,init_y,player_sprite){
-var player = new Player(302,390,'images/char-boy.png');
+var player = new Player(303,390,'images/char-boy.png');
 var allEnemies = [new Enemy(0,60,95),new Enemy(0,145,25),new Enemy(0,230,25)];
 
 

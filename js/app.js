@@ -63,7 +63,7 @@ Player.prototype.handleInput = function(allowedKeys) {
 
 //Player(init_x,init_y,player_sprite){
 var player = new Player(302,390,'images/char-boy.png');
-var allEnemies = [new Enemy(0,60,25),new Enemy(0,145,25),new Enemy(0,230,25)];
+var allEnemies = [new Enemy(0,60,95),new Enemy(0,145,25),new Enemy(0,230,25)];
 
 
 

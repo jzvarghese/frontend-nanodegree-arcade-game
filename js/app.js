@@ -99,6 +99,12 @@ Player.prototype.handleInput = function(allowedKeys) {
     //screen or got to the water
 };//end handleInput
 
+Player.prototype.reset = function() {
+    //resets the players position
+    this.x = 303;
+    this.y = 390;
+};
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }

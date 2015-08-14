@@ -45,20 +45,25 @@ Player.prototype.render = function() {
 }
 
 Player.prototype.update = function(first_argument) {
-    // body...
+    // add collision detection stuff here
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
+    console.log("The key is:")
     console.log(allowedKeys);
     //move the player depending on what key was pressed
     //and check to see whether they tried to move off
     //screen or got to the water
 
-    this.update();
+    //this.update();
 };
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
+//Player(init_x,init_y,player_sprite){
+var player = new Player(302,390,'images/char-boy.png');
+var allEnemies = [new Enemy(0,60,25),new Enemy(0,145,25),new Enemy(0,230,25)];
 
 
 

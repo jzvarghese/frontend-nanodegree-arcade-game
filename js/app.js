@@ -1,51 +1,53 @@
+
+//superclass for all the sprites in the game
+var Sprite = function(init_x,init_y,sprite) {
+    this.sprite = sprite;
+    this.x = init_x;
+    this.y = init_y;
+};
+
+Sprite.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
 // Enemies our player must avoid
 // this function will be called with the keyword new
 var Enemy = function(init_x,init_y,init_speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-
-    //add initial position and speed for enemies
-    this.x = init_x;
-    this.y = init_y;
+    Sprite.call(this,init_x,init_y,'images/enemy-bug.png');
     this.speed = init_speed;
-}
+};
+
+//delegate failed lookups for Enemy's prototype to Sprite's prototype
+Enemy.prototype = Object.create(Sprite.prototype);
+
+//TODO
+Enemy.prototype.constructor = Enemy;
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    //we multiply the delta time by the speed
+    //to ensure the enemies cover the same distance
+    //in the same amount of time irrespective
+    //of the users processing speed
     this.x = this.x + dt*this.speed;
-}
+};
 
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(init_x,init_y,player_sprite){
+    Sprite.call(this,init_x,init_y,player_sprite);
+};
 
-    //load sprite for character
-    this.sprite = player_sprite;
-    this.x = init_x;
-    this.y = init_y;
-}
+//delegate Player's failed lookups to Sprite's prototype
+Player.prototype = Object.create(Sprite.prototype);
 
-// Draw the enemy on the screen, required method for game
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+Player.prototype.constructor = Player;
 
 Player.prototype.update = function(first_argument) {
-    // add collision detection stuff here
+    //TODO: add collision detection stuff here
 };
 
 Player.prototype.handleInput = function(allowedKeys) {
@@ -72,6 +74,7 @@ Player.prototype.handleInput = function(allowedKeys) {
               }
               else {
                 //we scored a point
+                //TODO: Log score and reset player
                 console.log("score");
               }
               break;

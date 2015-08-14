@@ -83,6 +83,29 @@ var Engine = (function(global) {
         // checkCollisions();
     }
 
+    function checkCollisions() {
+
+        //check to see if any enemies are on the same line as the player
+        var x = player.x;
+        var y = player.y;
+        for (var i = allEnemies.length - 1; i >= 0; i--) {
+            //check to see if enemy is on the same row as player
+            if(y == allEnemies[i].y) {
+                console.log("Enemy on same row as player");
+                //then we need to check the x coord
+                if(x + 83 >= allEnemies[i].x &&
+                    allEnemies[i].x + 83 >= x) {
+                    //then there has been a collision, reset the position
+                    //of the player
+
+
+                }//end if possible collision
+            }//end if on the same row
+
+        };
+
+    }//end checkCollisions
+
     /* This is called by the update function  and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -181,7 +204,7 @@ var Engine = (function(global) {
         'images/char-horn-girl.png',
         'images/char-pink-girl.png',
         'images/char-princess-girl.png',
-        'images/Heart.png',
+        'images/Star.png',
         'images/Gem Orange.png',
         'images/Gem Blue.png'
     ]);

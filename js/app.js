@@ -118,7 +118,7 @@ var princessGirl = new Sprite(503,390,'images/char-princess-girl.png');
 //var playerSelect = []
 
 var player = new Player(303,390,'images/char-boy.png');
-var allEnemies = [new Enemy(-150,60,95),new Enemy(-170,145,25),new Enemy(-120,230,25)];
+var allEnemies = [new Enemy(-150,58,95),new Enemy(-170,141,25),new Enemy(-120,224,25)];
 
 
 

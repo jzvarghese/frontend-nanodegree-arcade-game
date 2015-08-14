@@ -7,6 +7,7 @@ var Sprite = function(init_x,init_y,sprite) {
 };
 
 Sprite.prototype.render = function() {
+    var temp = Resources.get(this.sprite);
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -97,13 +98,27 @@ Player.prototype.handleInput = function(allowedKeys) {
     //and check to see whether they tried to move off
     //screen or got to the water
 };//end handleInput
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
 //Player(init_x,init_y,player_sprite){
+//create an array with all the players and render them to the screen
+
+//var boy = new Player(303,390,'images/char-boy.png');
+var catGirl = new Sprite(203,390,'images/char-cat-girl.png');
+var hornGirl = new Sprite(103,390,'images/char-horn-girl.png');
+var pinkGirl = new Sprite(403,390,'images/char-pink-girl.png');
+var princessGirl = new Sprite(503,390,'images/char-princess-girl.png');
+//var playerSelect = []
+
 var player = new Player(303,390,'images/char-boy.png');
-var allEnemies = [new Enemy(0,60,95),new Enemy(0,145,25),new Enemy(0,230,25)];
+var allEnemies = [new Enemy(-150,60,95),new Enemy(-170,145,25),new Enemy(-120,230,25)];
 
 
 

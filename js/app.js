@@ -31,7 +31,15 @@ Enemy.prototype.update = function(dt) {
     //to ensure the enemies cover the same distance
     //in the same amount of time irrespective
     //of the users processing speed
-    this.x = this.x + dt*this.speed;
+
+    //check to see if the enemy has run off the screen
+    if(this.x < 707){
+        this.x = this.x + dt*this.speed;
+    } else {
+        //if it has moved off the screen, then reset
+        //the speed and x position
+        this.reset();
+    }
 };
 
 Enemy.prototype.reset = function() {
@@ -42,7 +50,7 @@ Enemy.prototype.reset = function() {
 
 
 
-var Player = function(init_x,init_y,player_sprite){
+var Player = function(init_x,init_y,player_sprite) {
     Sprite.call(this,init_x,init_y,player_sprite);
 };
 
@@ -51,30 +59,26 @@ Player.prototype = Object.create(Sprite.prototype);
 
 Player.prototype.constructor = Player;
 
-Player.prototype.update = function(first_argument) {
-    //TODO: add collision detection stuff here
-};
-
 Player.prototype.handleInput = function(allowedKeys) {
     //console.log("The key is:");
     //console.log(allowedKeys);
 
     //check to see if we got a legitimate key press
-    if(allowedKeys !== undefined){
+    if(allowedKeys !== undefined) {
 
         switch(allowedKeys){
             case 'right':
-              if(this.x < 603){
+              if(this.x < 603) {
                 this.x += 101;
               }
               break;
             case 'left':
-              if(this.x > 3){
+              if(this.x > 3) {
                 this.x -= 101;
               }
               break;
             case 'up':
-              if(this.y > 140){
+              if(this.y > 140) {
                 this.y -= 83;
               }
               else {
@@ -84,7 +88,7 @@ Player.prototype.handleInput = function(allowedKeys) {
               }
               break;
             case 'down':
-              if(this.y < 390){
+              if(this.y < 390) {
                 this.y += 83;
               }
               break;

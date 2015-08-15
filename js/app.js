@@ -46,12 +46,14 @@ Enemy.prototype.reset = function() {
     //reset the enemies starting position and speed
     this.x = getEnemyStartingPosition();
     this.speed = getRandomEnemySpeed();
+    //console.log("Enemy reset with pos:",this.x," and speed:",this.speed);
 };
 
 
 
 var Player = function(init_x,init_y,player_sprite) {
     Sprite.call(this,init_x,init_y,player_sprite);
+    this.score = 0;
 };
 
 //delegate Player's failed lookups to Sprite's prototype

@@ -61,12 +61,14 @@ var Engine = (function(global) {
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
-     * game loop.
+     * game loop. It is used as a callback.
      */
     function init() {
         reset();
         lastTime = Date.now();
         main();
+        ctx.font = "18px Impact serif";
+        ctx.fillStyle = "white";
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -105,6 +107,10 @@ var Engine = (function(global) {
         };
 
     }//end checkCollisions
+
+    function renderScore () {
+        ctx.fillText("SCORE ",525,70);
+    }
 
     /* This is called by the update function  and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
@@ -158,6 +164,8 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
+
+        renderScore();
 
 
         renderEntities();

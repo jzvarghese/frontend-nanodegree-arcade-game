@@ -7,8 +7,26 @@ var Sprite = function(init_x,init_y,sprite) {
 };
 
 Sprite.prototype.render = function() {
-    var temp = Resources.get(this.sprite);
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+var Gem = function(x_block,y_block,sprite) {
+    var xLoc = Math.floor((20 + 101*x_block)/0.6);
+    var yLoc = Math.floor((102 + 83*y_block)/0.6);
+    Sprite.call(this,xLoc,yLoc,sprite);
+    this.row = y_block;
+    this.col = x_block;
+}
+
+Gem.prototype = Object.create(Sprite.prototype);
+
+Gem.prototype.constructor = Gem;
+
+Gem.prototype.renderGem = function() {
+    ctx.save();
+    ctx.scale(scale,scale);
+    this.render();
+    ctx.restore();
 };
 
 // Enemies our player must avoid
@@ -98,8 +116,6 @@ Player.prototype.handleInput = function(allowedKeys) {
               }
               else {
                 //we scored a point
-                //TODO: Log score and reset player's position
-                console.log("score");
                 this.increaseScore();
                 this.resetPosition();
               }
@@ -113,11 +129,10 @@ Player.prototype.handleInput = function(allowedKeys) {
               break;
         }//end switch
 
-            //console.log("X is:");
-            //console.log(this.x);
+            console.log("X is:",this.x);
 
-            //console.log("Y is:");
-            //console.log(this.y);
+            console.log("Y is:",this.y);
+
     }//end if
     //move the player depending on what key was pressed
     //and check to see whether they tried to move off
@@ -156,22 +171,13 @@ function getRandomEnemySpeed() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-//Player(init_x,init_y,player_sprite){
-//create an array with all the players and render them to the screen
-
-//var boy = new Player(303,390,'images/char-boy.png');
-var catGirl = new Sprite(203,390,'images/char-cat-girl.png');
-var hornGirl = new Sprite(103,390,'images/char-horn-girl.png');
-var pinkGirl = new Sprite(403,390,'images/char-pink-girl.png');
-var princessGirl = new Sprite(503,390,'images/char-princess-girl.png');
-
-
 //rows
 var topBlockRow = 58;
 var middleBlockRow = 141;
 var bottomBlockRow = 224;
 
-//-getRandomInt(150, 400)
+var scale = 0.6;
+
 var player = new Player(303,390,'images/char-boy.png');
 var allEnemies = [new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
                 new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
@@ -179,8 +185,12 @@ var allEnemies = [new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnem
                 new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
                 new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed()),
                 new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed())];
+//var blueGem = new Sprite(20/scale,102/scale,'images/Gem Blue.png');
+//var orangeGem = new Sprite(121/scale,185/scale,'images/Gem Orange.png');
+//var thirdGem = new Sprite(222/scale,268/scale,'images/Gem Orange.png');
 
-
+var blueGem = new Gem(0,0,'images/Gem Blue.png');
+var orangeGem = new Gem(2,1,'images/Gem Orange.png');
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

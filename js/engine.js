@@ -85,6 +85,22 @@ var Engine = (function(global) {
         checkCollisions();
     }
 
+    function checkGemCollision(gem) {
+
+        //if the gem is on the screen, then check to see if the player
+        //has collided
+        if(gem.x > 0) {
+            var xCoord = gem.x*0.6 - 20;
+            var yCoord = gem.y*0.6 - 102;
+            var xDiff = Math.abs(player.x - xCoord);
+            var yDiff = Math.abs(player.y - yCoord);
+
+            //if(xDiff < 0.5 && yDiff < 0.5) {
+                console.log("X diff is: ",xDiff);
+                console.log("Y diff is: ",yDiff);
+            //}
+        }
+    }
     function checkCollisions() {
 
         //check to see if any enemies are on the same line as the player
@@ -105,6 +121,10 @@ var Engine = (function(global) {
             }//end if on the same row
 
         };
+
+        //check collision with gems
+        //checkGemCollision(blueGem);
+        //checkGemCollision(orangeGem);
 
     }//end checkCollisions
 
@@ -178,15 +198,15 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+        blueGem.renderGem();
+        orangeGem.renderGem();
+        //thirdGem.renderGem();
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
 
-        catGirl.render();
-        hornGirl.render();
-        pinkGirl.render();
-        princessGirl.render();
         player.render();
+
     }
 
     /* This function does nothing but it could have been a good place to

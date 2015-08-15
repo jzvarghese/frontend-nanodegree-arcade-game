@@ -16,13 +16,17 @@ var Gem = function(x_block,y_block,sprite,points) {
     Sprite.call(this,xLoc,yLoc,sprite);
     this.row = y_block;
     this.col = x_block;
-    this.active = 1;
+    this.active = 0;
     this.points = points;
 }
 
 Gem.prototype = Object.create(Sprite.prototype);
 
 Gem.prototype.constructor = Gem;
+
+Gem.prototype.activateGem = function() {
+    this.active = 1;
+};
 
 Gem.prototype.renderGem = function() {
     ctx.save();
@@ -35,7 +39,7 @@ Gem.prototype.respawn = function() {
     console.log("callBack");
     this.active = 1;
     this.row = getRandomInt(0, 2);
-    this.col = getRandomInt(0, 2);
+    this.col = getRandomInt(0, 6);
     this.x = Math.floor((20 + 101*this.col)/0.6);
     this.y = Math.floor((102 + 83*this.row)/0.6);
 
@@ -214,8 +218,16 @@ var allEnemies = [new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnem
 //var orangeGem = new Sprite(121/scale,185/scale,'images/Gem Orange.png');
 //var thirdGem = new Sprite(222/scale,268/scale,'images/Gem Orange.png');
 
-var blueGem = new Gem(0,0,'images/Gem Blue.png',2);
-var orangeGem = new Gem(2,1,'images/Gem Orange.png',5);
+var blueGem = new Gem(getRandomInt(0, 6),getRandomInt(0, 2),
+    'images/Gem Blue.png',2);
+var orangeGem = new Gem(getRandomInt(0, 6),getRandomInt(0, 2),
+    'images/Gem Orange.png',5);
+
+var blueSpawnTime = getRandomInt(2500, 10000);
+var orangeSpawnTime = getRandomInt(3500, 12000);
+
+setTimeout(function() { blueGem.activateGem(); },blueSpawnTime);
+setTimeout(function() { orangeGem.activateGem(); },orangeSpawnTime);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

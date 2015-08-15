@@ -97,9 +97,7 @@ var Engine = (function(global) {
             var randomTime = getRandomInt(2500, 10000);
             console.log(randomTime);
 
-            setTimeout(function() {
-                gem.respawn();
-            },randomTime);
+            setTimeout(function() { gem.respawn(); },randomTime);
             //setTimeout(gem.respawn,randomTime);
         }
     }

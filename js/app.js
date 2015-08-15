@@ -34,10 +34,14 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + dt*this.speed;
 };
 
+Enemy.prototype.reset = function() {
+    //reset the enemies starting position and speed
+    this.x = getEnemyStartingPosition();
+    this.speed = getRandomEnemySpeed();
+};
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+
+
 var Player = function(init_x,init_y,player_sprite){
     Sprite.call(this,init_x,init_y,player_sprite);
 };
@@ -109,6 +113,18 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+//returns a random starting x position
+//for enemies in the range of -400 and -150 px
+function getEnemyStartingPosition() {
+    return -getRandomInt(150, 900);
+}
+
+//returns a random speed for enemies
+//in the range of 110 and 220
+function getRandomEnemySpeed() {
+    return getRandomInt(110, 320);
+}
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -121,10 +137,21 @@ var catGirl = new Sprite(203,390,'images/char-cat-girl.png');
 var hornGirl = new Sprite(103,390,'images/char-horn-girl.png');
 var pinkGirl = new Sprite(403,390,'images/char-pink-girl.png');
 var princessGirl = new Sprite(503,390,'images/char-princess-girl.png');
-//var playerSelect = []
 
+
+//rows
+var topBlockRow = 58;
+var middleBlockRow = 141;
+var bottomBlockRow = 224;
+
+//-getRandomInt(150, 400)
 var player = new Player(303,390,'images/char-boy.png');
-var allEnemies = [new Enemy(-150,58,95),new Enemy(-170,141,25),new Enemy(-120,224,25)];
+var allEnemies = [new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
+                new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
+                new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
+                new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
+                new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed()),
+                new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed())];
 
 
 

@@ -72,6 +72,8 @@ Enemy.prototype.reset = function() {
 var Player = function(init_x,init_y,player_sprite) {
     Sprite.call(this,init_x,init_y,player_sprite);
     this.score = 0;
+    this.row = 4;
+    this.col = 4;
 };
 
 //delegate Player's failed lookups to Sprite's prototype
@@ -103,16 +105,19 @@ Player.prototype.handleInput = function(allowedKeys) {
             case 'right':
               if(this.x < 603) {
                 this.x += 101;
+                this.col++;
               }
               break;
             case 'left':
               if(this.x > 3) {
                 this.x -= 101;
+                this.col--;
               }
               break;
             case 'up':
               if(this.y > 140) {
                 this.y -= 83;
+                this.row--;
               }
               else {
                 //we scored a point
@@ -123,15 +128,15 @@ Player.prototype.handleInput = function(allowedKeys) {
             case 'down':
               if(this.y < 390) {
                 this.y += 83;
+                this.row++;
               }
               break;
             default:
               break;
         }//end switch
 
-            console.log("X is:",this.x);
-
-            console.log("Y is:",this.y);
+            console.log("x is:",this.x,"y is:",this.y);
+            console.log("row is: ",this.row,"col is:",this.col);
 
     }//end if
     //move the player depending on what key was pressed
@@ -149,6 +154,8 @@ Player.prototype.reset = function() {
 Player.prototype.resetPosition = function() {
     this.x = 303;
     this.y = 390;
+    this.row = 4;
+    this.col = 4;
 };
 
 function getRandomInt(min, max) {

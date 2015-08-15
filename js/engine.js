@@ -87,18 +87,11 @@ var Engine = (function(global) {
 
     function checkGemCollision(gem) {
 
-        //if the gem is on the screen, then check to see if the player
-        //has collided
-        if(gem.x > 0) {
-            var xCoord = gem.x*0.6 - 20;
-            var yCoord = gem.y*0.6 - 102;
-            var xDiff = Math.abs(player.x - xCoord);
-            var yDiff = Math.abs(player.y - yCoord);
-
-            //if(xDiff < 0.5 && yDiff < 0.5) {
-                console.log("X diff is: ",xDiff);
-                console.log("Y diff is: ",yDiff);
-            //}
+        //console.log("Gem.row: ",gem.row,"Player.row: ",player.row);
+        //console.log("Gem.col: ",gem.col,"Player.col: ",player.col);
+        if(gem.row == player.row && gem.col == player.col) {
+            //there has been a collision
+            console.log("collision");
         }
     }
     function checkCollisions() {
@@ -123,8 +116,8 @@ var Engine = (function(global) {
         };
 
         //check collision with gems
-        //checkGemCollision(blueGem);
-        //checkGemCollision(orangeGem);
+        checkGemCollision(blueGem);
+        checkGemCollision(orangeGem);
 
     }//end checkCollisions
 

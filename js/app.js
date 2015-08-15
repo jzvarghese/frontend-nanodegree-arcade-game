@@ -10,12 +10,14 @@ Sprite.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-var Gem = function(x_block,y_block,sprite) {
+var Gem = function(x_block,y_block,sprite,points) {
     var xLoc = Math.floor((20 + 101*x_block)/0.6);
     var yLoc = Math.floor((102 + 83*y_block)/0.6);
     Sprite.call(this,xLoc,yLoc,sprite);
     this.row = y_block;
     this.col = x_block;
+    this.active = 1;
+    this.points = points;
 }
 
 Gem.prototype = Object.create(Sprite.prototype);
@@ -73,7 +75,7 @@ var Player = function(init_x,init_y,player_sprite) {
     Sprite.call(this,init_x,init_y,player_sprite);
     this.score = 0;
     this.row = 4;
-    this.col = 4;
+    this.col = 3;
 };
 
 //delegate Player's failed lookups to Sprite's prototype
@@ -155,7 +157,7 @@ Player.prototype.resetPosition = function() {
     this.x = 303;
     this.y = 390;
     this.row = 4;
-    this.col = 4;
+    this.col = 3;
 };
 
 function getRandomInt(min, max) {

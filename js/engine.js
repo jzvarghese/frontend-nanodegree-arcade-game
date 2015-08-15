@@ -109,7 +109,8 @@ var Engine = (function(global) {
     }//end checkCollisions
 
     function renderScore () {
-        ctx.fillText("SCORE ",525,70);
+        ctx.fillText("SCORE ",515,70);
+        ctx.fillText(player.getScore(),585,70);
     }
 
     /* This is called by the update function  and loops through all of the
@@ -166,8 +167,6 @@ var Engine = (function(global) {
         }
 
         renderScore();
-
-
         renderEntities();
     }
 

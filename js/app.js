@@ -61,6 +61,19 @@ Player.prototype = Object.create(Sprite.prototype);
 
 Player.prototype.constructor = Player;
 
+
+Player.prototype.getScore = function() {
+    return this.score;
+};
+
+Player.prototype.increaseScore = function() {
+    this.score++;
+};
+
+Player.prototype.resetScore = function() {
+    this.score = 0;
+};
+
 Player.prototype.handleInput = function(allowedKeys) {
     //console.log("The key is:");
     //console.log(allowedKeys);
@@ -85,8 +98,10 @@ Player.prototype.handleInput = function(allowedKeys) {
               }
               else {
                 //we scored a point
-                //TODO: Log score and reset player
+                //TODO: Log score and reset player's position
                 console.log("score");
+                this.increaseScore();
+                this.resetPosition();
               }
               break;
             case 'down':
@@ -109,8 +124,14 @@ Player.prototype.handleInput = function(allowedKeys) {
     //screen or got to the water
 };//end handleInput
 
+//resets the player's position and the score
 Player.prototype.reset = function() {
     //resets the players position
+    this.resetPosition();
+    this.resetScore();
+};
+
+Player.prototype.resetPosition = function() {
     this.x = 303;
     this.y = 390;
 };

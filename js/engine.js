@@ -92,6 +92,15 @@ var Engine = (function(global) {
         if(gem.row == player.row && gem.col == player.col) {
             //there has been a collision
             console.log("collision");
+            player.score+=gem.points;
+            gem.deactivate();
+            var randomTime = getRandomInt(2500, 10000);
+            console.log(randomTime);
+
+            setTimeout(function() {
+                gem.respawn();
+            },randomTime);
+            //setTimeout(gem.respawn,randomTime);
         }
     }
     function checkCollisions() {
@@ -191,9 +200,13 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        blueGem.renderGem();
-        orangeGem.renderGem();
-        //thirdGem.renderGem();
+        if(blueGem.active == 1) {
+            blueGem.renderGem();
+        }
+        if(orangeGem.active == 1) {
+            orangeGem.renderGem();
+        }
+
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });

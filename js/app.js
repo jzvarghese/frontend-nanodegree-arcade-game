@@ -31,6 +31,22 @@ Gem.prototype.renderGem = function() {
     ctx.restore();
 };
 
+Gem.prototype.respawn = function() {
+    console.log("callBack");
+    this.active = 1;
+    this.row = getRandomInt(0, 2);
+    this.col = getRandomInt(0, 2);
+    this.x = Math.floor((20 + 101*this.col)/0.6);
+    this.y = Math.floor((102 + 83*this.row)/0.6);
+
+};
+
+Gem.prototype.deactivate = function() {
+    this.active = 0;
+    this.row = -1;
+    this.col = -1;
+};
+
 // Enemies our player must avoid
 // this function will be called with the keyword new
 var Enemy = function(init_x,init_y,init_speed) {
@@ -198,8 +214,8 @@ var allEnemies = [new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnem
 //var orangeGem = new Sprite(121/scale,185/scale,'images/Gem Orange.png');
 //var thirdGem = new Sprite(222/scale,268/scale,'images/Gem Orange.png');
 
-var blueGem = new Gem(0,0,'images/Gem Blue.png');
-var orangeGem = new Gem(2,1,'images/Gem Orange.png');
+var blueGem = new Gem(0,0,'images/Gem Blue.png',2);
+var orangeGem = new Gem(2,1,'images/Gem Orange.png',5);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

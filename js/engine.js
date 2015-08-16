@@ -85,10 +85,10 @@ var Engine = (function(global) {
         checkCollisions();
     }
 
+    // check to see if the player is on the same row and column
+    // as a gem. If it is, increase the players score and
+    // deactivate the gem
     function checkGemCollision(gem) {
-
-        //console.log("Gem.row: ",gem.row,"Player.row: ",player.row);
-        //console.log("Gem.col: ",gem.col,"Player.col: ",player.col);
         if(gem.row == player.row && gem.col == player.col) {
             //there has been a collision
             console.log("collision");
@@ -100,6 +100,8 @@ var Engine = (function(global) {
             setTimeout(function() { gem.respawn(); },randomTime);
         }
     }
+
+    // check collisions between the player and enemies and bugs
     function checkCollisions() {
 
         //check to see if any enemies are on the same line as the player
@@ -118,7 +120,6 @@ var Engine = (function(global) {
 
                 }//end if possible collision
             }//end if on the same row
-
         };
 
         //check collision with gems if they are active
@@ -130,6 +131,7 @@ var Engine = (function(global) {
         }
     }//end checkCollisions
 
+    // renders the score to the screen
     function renderScore () {
         ctx.fillText("SCORE ",515,70);
         ctx.fillText(player.getScore(),585,70);
@@ -146,7 +148,6 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        //player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -200,6 +201,7 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
+        //if the gems are active, then render them
         if(blueGem.active == 1) {
             blueGem.renderGem();
         }

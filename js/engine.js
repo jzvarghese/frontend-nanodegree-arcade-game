@@ -98,7 +98,6 @@ var Engine = (function(global) {
             console.log(randomTime);
 
             setTimeout(function() { gem.respawn(); },randomTime);
-            //setTimeout(gem.respawn,randomTime);
         }
     }
     function checkCollisions() {

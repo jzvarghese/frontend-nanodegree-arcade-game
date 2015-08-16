@@ -1,18 +1,26 @@
 
-//superclass for all the sprites in the game
+// superclass for all the sprites in the game
+// whether they be gems, the player, or enemies
 var Sprite = function(init_x,init_y,sprite) {
     this.sprite = sprite;
     this.x = init_x;
     this.y = init_y;
 };
 
+// render function that subclasses will delegate to
 Sprite.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Gem subclass for the various gems
+// Note that the Gems are instantiated with an integer
+// based grid system instead of the pixel one that
+// Sprites uses. This is due to the complications
+// of scaling the gems and also to make collision
+// detection with the gems significantly easier
 var Gem = function(x_block,y_block,sprite,points) {
-    var xLoc = Math.floor((20 + 101*x_block)/0.6);
-    var yLoc = Math.floor((102 + 83*y_block)/0.6);
+    var xLoc = Math.floor((20 + 101*x_block)/scale);
+    var yLoc = Math.floor((102 + 83*y_block)/scale);
     Sprite.call(this,xLoc,yLoc,sprite);
     this.row = y_block;
     this.col = x_block;
@@ -40,8 +48,8 @@ Gem.prototype.respawn = function() {
     this.active = 1;
     this.row = getRandomInt(0, 2);
     this.col = getRandomInt(0, 6);
-    this.x = Math.floor((20 + 101*this.col)/0.6);
-    this.y = Math.floor((102 + 83*this.row)/0.6);
+    this.x = Math.floor((20 + 101*this.col)/scale);
+    this.y = Math.floor((102 + 83*this.row)/scale);
 
 };
 
@@ -125,45 +133,41 @@ Player.prototype.handleInput = function(allowedKeys) {
 
         switch(allowedKeys){
             case 'right':
-              if(this.x < 603) {
-                this.x += 101;
-                this.col++;
-              }
-              break;
+                if(this.x < 603) {
+                    this.x += 101;
+                    this.col++;
+                }
+                break;
             case 'left':
-              if(this.x > 3) {
-                this.x -= 101;
-                this.col--;
-              }
-              break;
+                if(this.x > 3) {
+                    this.x -= 101;
+                    this.col--;
+                }
+                break;
             case 'up':
-              if(this.y > 140) {
-                this.y -= 83;
-                this.row--;
-              }
-              else {
-                //we scored a point
-                this.increaseScore();
-                this.resetPosition();
-              }
-              break;
+                if(this.y > 140) {
+                    this.y -= 83;
+                    this.row--;
+                } else {
+                    //player scored a point
+                    this.increaseScore();
+                    this.resetPosition();
+                }
+                break;
             case 'down':
-              if(this.y < 390) {
-                this.y += 83;
-                this.row++;
-              }
-              break;
+                if(this.y < 390) {
+                    this.y += 83;
+                    this.row++;
+                }
+                break;
             default:
-              break;
+                break;
         }//end switch
 
-            console.log("x is:",this.x,"y is:",this.y);
-            console.log("row is: ",this.row,"col is:",this.col);
+        console.log("x is:",this.x,"y is:",this.y);
+        console.log("row is: ",this.row,"col is:",this.col);
 
     }//end if
-    //move the player depending on what key was pressed
-    //and check to see whether they tried to move off
-    //screen or got to the water
 };//end handleInput
 
 //resets the player's position and the score
@@ -181,7 +185,7 @@ Player.prototype.resetPosition = function() {
 };
 
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 //returns a random starting x position

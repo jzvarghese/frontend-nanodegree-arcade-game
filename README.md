@@ -2,6 +2,15 @@ Used getRandomInt function from:
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
+
+Resources referenced:
+
+http://stackoverflow.com/questions/9329446/for-each-over-an-array-in-javascript
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+
+http://stackoverflow.com/questions/4361585/javascript-how-to-test-if-a-variable-is-not-null
+
 frontend-nanodegree-arcade-game
 ===============================
 

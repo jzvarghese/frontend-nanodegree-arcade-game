@@ -121,10 +121,13 @@ var Engine = (function(global) {
 
         };
 
-        //check collision with gems
-        checkGemCollision(blueGem);
-        checkGemCollision(orangeGem);
-
+        //check collision with gems if they are active
+        if(blueGem.active == 1) {
+            checkGemCollision(blueGem);
+        }
+        if(orangeGem.active == 1) {
+            checkGemCollision(orangeGem);
+        }
     }//end checkCollisions
 
     function renderScore () {

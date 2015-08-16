@@ -1,6 +1,18 @@
 
+// Sprite superclass ////////////////////////////////////////
 // superclass for all the sprites in the game
 // whether they be gems, the player, or enemies
+//
+// Paramaters:
+//      init_x - the initial x coordinate of the sprite
+//      in pixels.
+//          example: 504
+//      init_y - the initial y coordinate of the sprite
+//      in pixels
+//          example: 307
+//      sprite - the url of the sprite to load, e.g.
+//          example: 'images/char-pink-girl.png'
+//
 var Sprite = function(init_x,init_y,sprite) {
     this.sprite = sprite;
     this.x = init_x;
@@ -12,12 +24,28 @@ Sprite.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Gem subclass /////////////////////////////////////////////
 // Gem subclass for the various gems
 // Note that the Gems are instantiated with an integer
 // based grid system instead of the pixel one that
 // Sprites uses. This is due to the complications
 // of scaling the gems and also to make collision
-// detection with the gems significantly easier
+// detection with the gems significantly easier.
+// The grid starts at the top left most rock tile
+// coordinate (0,0) and increases to (1,0) as you go
+// right. The y coordinates increase as you go down.
+// The player starts at coordinate (3,4)
+//
+// Paramaters:
+//      x_block - the initial x coordinate of the sprite
+//      in pixels.
+//          example: 504
+//      init_y - the initial y coordinate of the sprite
+//      in pixels
+//          example: 307
+//      sprite - the url of the sprite to load, e.g.
+//          example: 'images/char-pink-girl.png'
+//
 var Gem = function(x_block,y_block,sprite,points) {
     var xLoc = Math.floor((20 + 101*x_block)/scale);
     var yLoc = Math.floor((102 + 83*y_block)/scale);
@@ -28,10 +56,14 @@ var Gem = function(x_block,y_block,sprite,points) {
     this.points = points;
 }
 
+// delegate failed lookups to Sprite's prototype
 Gem.prototype = Object.create(Sprite.prototype);
 
+//set the costructor to Gem since we overwrote it with the
+//Object.create assignment
 Gem.prototype.constructor = Gem;
 
+// only active Gems will be rendered to the screen
 Gem.prototype.activateGem = function() {
     this.active = 1;
 };
@@ -43,36 +75,37 @@ Gem.prototype.renderGem = function() {
     ctx.restore();
 };
 
+// respawn a gem after the player has collected it
+// this function is a callback that is passed to
+// setTimeout()
 Gem.prototype.respawn = function() {
-    console.log("callBack");
     this.active = 1;
     this.row = getRandomInt(0, 2);
     this.col = getRandomInt(0, 6);
     this.x = Math.floor((20 + 101*this.col)/scale);
     this.y = Math.floor((102 + 83*this.row)/scale);
-
 };
 
+// deactivate the gem if the player has collided with it
 Gem.prototype.deactivate = function() {
     this.active = 0;
-    this.row = -1;
-    this.col = -1;
 };
 
-// Enemies our player must avoid
-// this function will be called with the keyword new
+// Enemy subclass ////////////////////////////////////////
+// Enemies(bugs in this case) the player must avoid
 var Enemy = function(init_x,init_y,init_speed) {
     Sprite.call(this,init_x,init_y,'images/enemy-bug.png');
     this.speed = init_speed;
 };
 
-//delegate failed lookups for Enemy's prototype to Sprite's prototype
+// delegate failed lookups for Enemy's prototype to Sprite's prototype
 Enemy.prototype = Object.create(Sprite.prototype);
 
-//TODO
+// set the costructor to Enemy since we overwrote it with the
+// Object.create assignment
 Enemy.prototype.constructor = Enemy;
 
-// Update the enemy's position, required method for game
+// Update the enemy's position
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     //we multiply the delta time by the speed

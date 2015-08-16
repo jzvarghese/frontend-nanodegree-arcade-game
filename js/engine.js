@@ -67,8 +67,8 @@ var Engine = (function(global) {
         reset();
         lastTime = Date.now();
         main();
-        ctx.font = "18px Impact serif";
-        ctx.fillStyle = "white";
+        ctx.font = '18px Impact serif';
+        ctx.fillStyle = 'white';
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -91,11 +91,9 @@ var Engine = (function(global) {
     function checkGemCollision(gem) {
         if(gem.row == player.row && gem.col == player.col) {
             //there has been a collision
-            console.log("collision");
             player.score+=gem.points;
             gem.deactivate();
             var randomTime = getRandomInt(2500, 10000);
-            console.log(randomTime);
 
             setTimeout(function() { gem.respawn(); },randomTime);
         }
@@ -115,7 +113,6 @@ var Engine = (function(global) {
                     allEnemies[i].x + 50 >= x) {
                     //then there has been a collision, reset the position
                     //of the player
-                    console.log("Player X:",x,"Enemy X:",allEnemies[i].x);
                     player.reset();
 
                 }//end if possible collision
@@ -133,7 +130,7 @@ var Engine = (function(global) {
 
     // renders the score to the screen
     function renderScore () {
-        ctx.fillText("SCORE ",515,70);
+        ctx.fillText('SCORE ',515,70);
         ctx.fillText(player.getScore(),585,70);
     }
 

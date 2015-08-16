@@ -265,12 +265,14 @@ var player = new Player(303,390,'images/char-boy.png');
 
 // the enemies are instantiated with initial x positions thta are off
 // the screen
-var allEnemies = [new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
-                new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
-                new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
-                new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
-                new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed()),
-                new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed())];
+var allEnemies = [
+    new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed())
+];
 
 var blueGem = new Gem(getRandomInt(0, 6),getRandomInt(0, 2),
     'images/Gem Blue.png',2);

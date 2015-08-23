@@ -1,3 +1,11 @@
+// Written by Justin Varghese for the Frogger clone project
+// which is apart of Udacity's Front-End Web Developer program
+//
+// The purpose of the game is to move the player across the street
+// without hitting any bugs. You move the player with arrow keys
+
+
+
 // Sprite superclass ////////////////////////////////////////
 // superclass for all the sprites in the game
 // whether they be gems, the player, or enemies

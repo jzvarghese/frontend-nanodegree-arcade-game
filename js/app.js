@@ -1,4 +1,3 @@
-
 // Sprite superclass ////////////////////////////////////////
 // superclass for all the sprites in the game
 // whether they be gems, the player, or enemies
@@ -13,10 +12,9 @@
 //      sprite - the url of the sprite to load
 //          example: 'images/char-pink-girl.png'
 //
-
 'use strict';
 
-var Sprite = function(init_x,init_y,sprite) {
+var Sprite = function(init_x, init_y, sprite) {
     this.sprite = sprite;
     this.x = init_x;
     this.y = init_y;
@@ -50,10 +48,10 @@ Sprite.prototype.render = function() {
 //      be worth
 //          example: 5, 10, etc
 //
-var Gem = function(col,row,sprite,points) {
-    var xLoc = Math.floor((20 + 101*col)/scale);
-    var yLoc = Math.floor((102 + 83*row)/scale);
-    Sprite.call(this,xLoc,yLoc,sprite);
+var Gem = function(col, row, sprite, points) {
+    var xLoc = Math.floor((20 + 101 * col) / scale);
+    var yLoc = Math.floor((102 + 83 * row) / scale);
+    Sprite.call(this, xLoc, yLoc, sprite);
     this.row = row;
     this.col = col;
     this.active = 0;
@@ -75,7 +73,7 @@ Gem.prototype.activateGem = function() {
 // render the Gem to the screen after scaling it down
 Gem.prototype.renderGem = function() {
     ctx.save();
-    ctx.scale(scale,scale);
+    ctx.scale(scale, scale);
     this.render();
     ctx.restore();
 };
@@ -87,8 +85,8 @@ Gem.prototype.respawn = function() {
     this.active = 1;
     this.row = getRandomInt(0, 2);
     this.col = getRandomInt(0, 6);
-    this.x = Math.floor((20 + 101*this.col)/scale);
-    this.y = Math.floor((102 + 83*this.row)/scale);
+    this.x = Math.floor((20 + 101 * this.col) / scale);
+    this.y = Math.floor((102 + 83 * this.row) / scale);
 };
 
 // deactivate the gem if the player has collided with it
@@ -110,8 +108,8 @@ Gem.prototype.deactivate = function() {
 //      sprite - the url of the sprite to load, e.g.
 //          example: 'images/char-pink-girl.png'
 //
-var Enemy = function(init_x,init_y,init_speed) {
-    Sprite.call(this,init_x,init_y,'images/enemy-bug.png');
+var Enemy = function(init_x, init_y, init_speed) {
+    Sprite.call(this, init_x, init_y, 'images/enemy-bug.png');
     this.speed = init_speed;
 };
 
@@ -133,8 +131,8 @@ Enemy.prototype.constructor = Enemy;
 //      to execute
 Enemy.prototype.update = function(dt) {
     //check to see if the enemy has run off the screen
-    if(this.x < 707){
-        this.x = this.x + dt*this.speed;
+    if (this.x < 707) {
+        this.x = this.x + dt * this.speed;
     } else {
         //if it has moved off the screen, then reset
         //the speed and x position
@@ -161,8 +159,8 @@ Enemy.prototype.reset = function() {
 //      player_sprite - the url of the sprite to load
 //          example: 'images/char-pink-girl.png'
 //
-var Player = function(init_x,init_y,player_sprite) {
-    Sprite.call(this,init_x,init_y,player_sprite);
+var Player = function(init_x, init_y, player_sprite) {
+    Sprite.call(this, init_x, init_y, player_sprite);
     this.score = 0;
     this.row = 4;
     this.col = 3;
@@ -191,22 +189,22 @@ Player.prototype.resetScore = function() {
 // tries to move off the screen, then the player will not move
 Player.prototype.handleInput = function(allowedKeys) {
     //check to see if we got a legitimate key press
-    if(allowedKeys !== undefined) {
-        switch(allowedKeys){
+    if (allowedKeys !== undefined) {
+        switch (allowedKeys) {
             case 'right':
-                if(this.x < 603) {
+                if (this.x < 603) {
                     this.x += 101;
                     this.col++;
                 }
                 break;
             case 'left':
-                if(this.x > 3) {
+                if (this.x > 3) {
                     this.x -= 101;
                     this.col--;
                 }
                 break;
             case 'up':
-                if(this.y > 140) {
+                if (this.y > 140) {
                     this.y -= 83;
                     this.row--;
                 } else {
@@ -216,16 +214,16 @@ Player.prototype.handleInput = function(allowedKeys) {
                 }
                 break;
             case 'down':
-                if(this.y < 390) {
+                if (this.y < 390) {
                     this.y += 83;
                     this.row++;
                 }
                 break;
             default:
                 break;
-        }//end switch
-    }//end if
-};//end handleInput
+        } //end switch
+    } //end if
+}; //end handleInput
 
 //resets the player's position and the score
 Player.prototype.reset = function() {
@@ -264,30 +262,38 @@ var bottomBlockRow = 224;
 
 var scale = 0.6;
 
-var player = new Player(303,390,'images/char-boy.png');
+var player = new Player(303, 390, 'images/char-boy.png');
 
 // the enemies are instantiated with initial x positions thta are off
 // the screen
 var allEnemies = [
-    new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
-    new Enemy(getEnemyStartingPosition(),topBlockRow,getRandomEnemySpeed()),
-    new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
-    new Enemy(getEnemyStartingPosition(),middleBlockRow,getRandomEnemySpeed()),
-    new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed()),
-    new Enemy(getEnemyStartingPosition(),bottomBlockRow,getRandomEnemySpeed())
+    new Enemy(getEnemyStartingPosition(), topBlockRow, getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(), topBlockRow, getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(), middleBlockRow,
+        getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(), middleBlockRow,
+        getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(), bottomBlockRow,
+        getRandomEnemySpeed()),
+    new Enemy(getEnemyStartingPosition(), bottomBlockRow,
+        getRandomEnemySpeed())
 ];
 
-var blueGem = new Gem(getRandomInt(0, 6),getRandomInt(0, 2),
-    'images/Gem Blue.png',2);
-var orangeGem = new Gem(getRandomInt(0, 6),getRandomInt(0, 2),
-    'images/Gem Orange.png',5);
+var blueGem = new Gem(getRandomInt(0, 6), getRandomInt(0, 2),
+    'images/Gem Blue.png', 2);
+var orangeGem = new Gem(getRandomInt(0, 6), getRandomInt(0, 2),
+    'images/Gem Orange.png', 5);
 
 // get a random time to spawn the blue and orange gems at
 var blueSpawnTime = getRandomInt(2500, 10000);
 var orangeSpawnTime = getRandomInt(3500, 12000);
 
-setTimeout(function() { blueGem.activateGem(); },blueSpawnTime);
-setTimeout(function() { orangeGem.activateGem(); },orangeSpawnTime);
+setTimeout(function() {
+    blueGem.activateGem();
+}, blueSpawnTime);
+setTimeout(function() {
+    orangeGem.activateGem();
+}, orangeSpawnTime);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

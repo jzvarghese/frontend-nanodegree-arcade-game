@@ -90,13 +90,15 @@ var Engine = (function(global) {
     // as a gem. If it is, increase the players score and
     // deactivate the gem
     function checkGemCollision(gem) {
-        if(gem.row == player.row && gem.col == player.col) {
+        if (gem.row == player.row && gem.col == player.col) {
             //there has been a collision
-            player.score+=gem.points;
+            player.score += gem.points;
             gem.deactivate();
             var randomTime = getRandomInt(2500, 10000);
 
-            setTimeout(function() { gem.respawn(); },randomTime);
+            setTimeout(function() {
+                gem.respawn();
+            }, randomTime);
         }
     }
 
@@ -108,31 +110,31 @@ var Engine = (function(global) {
         var y = player.y;
         for (var i = allEnemies.length - 1; i >= 0; i--) {
             //check to see if enemy is on the same row as player
-            if(y == allEnemies[i].y) {
+            if (y == allEnemies[i].y) {
                 //then we need to check the x coord
-                if(x + 50 >= allEnemies[i].x &&
+                if (x + 50 >= allEnemies[i].x &&
                     allEnemies[i].x + 50 >= x) {
                     //then there has been a collision, reset the position
                     //of the player
                     player.reset();
 
-                }//end if possible collision
-            }//end if on the same row
+                } //end if possible collision
+            } //end if on the same row
         }
 
         //check collision with gems if they are active
-        if(blueGem.active == 1) {
+        if (blueGem.active == 1) {
             checkGemCollision(blueGem);
         }
-        if(orangeGem.active == 1) {
+        if (orangeGem.active == 1) {
             checkGemCollision(orangeGem);
         }
-    }//end checkCollisions
+    } //end checkCollisions
 
     // renders the score to the screen
-    function renderScore () {
-        ctx.fillText('SCORE ',515,70);
-        ctx.fillText(player.getScore(),585,70);
+    function renderScore() {
+        ctx.fillText('SCORE ', 515, 70);
+        ctx.fillText(player.getScore(), 585, 70);
     }
 
     /* This is called by the update function  and loops through all of the
@@ -159,12 +161,12 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 3 of stone
+                'images/stone-block.png', // Row 2 of 3 of stone
+                'images/stone-block.png', // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 7,
@@ -183,7 +185,8 @@ var Engine = (function(global) {
                  * so that we get the benefits of caching these images, since
                  * we're using them over and over.
                  */
-                ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
+                ctx.drawImage(Resources.get(rowImages[row]), col * 101,
+                    row * 83);
             }
         }
 
@@ -200,10 +203,10 @@ var Engine = (function(global) {
          * the render function you have defined.
          */
         //if the gems are active, then render them
-        if(blueGem.active == 1) {
+        if (blueGem.active == 1) {
             blueGem.renderGem();
         }
-        if(orangeGem.active == 1) {
+        if (orangeGem.active == 1) {
             orangeGem.renderGem();
         }
 

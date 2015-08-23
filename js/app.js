@@ -13,6 +13,9 @@
 //      sprite - the url of the sprite to load
 //          example: 'images/char-pink-girl.png'
 //
+
+'use strict';
+
 var Sprite = function(init_x,init_y,sprite) {
     this.sprite = sprite;
     this.x = init_x;

@@ -6,7 +6,7 @@ Installation:
 
 The game can be played by either going to:
 
-http://jzvarghese.github.io/frontend-nanodegree-resume
+http://jzvarghese.github.io/frontend-nanodegree-arcade-game/
 
 or by cloning the repository from:
 
